@@ -1,10 +1,10 @@
 version: 1.0.{build}
 configuration:
-- Debug
+    # - Debug
 - Release
 platform:
 - x64
-- Win32
+  # - Win32
 build:
   project: msvc\libusb_2013.sln
   parallel: true
@@ -38,4 +38,12 @@ build_script:
 
     appveyor_minGW.bat
 
+    md C:\projects\libusb\build-x64
+
+    xcopy /S  C:\msys64\home\appveyor\libusb C:\projects\libusb\build-x64\
+
     appveyor_cygwin.bat
+artifacts:
+  - path: build-x64
+    name: libs
+    type: zip
